@@ -49,7 +49,7 @@ amountsTwo.forEach((item) => {
 
 //input validation function start
 const regexFunc = (input) => {
-  let currencyRegex = /^\s*[0-9]*(\.[0-9]{1,2})?\s*$/;
+  let currencyRegex = /^\s*[0-9]*(\.[0-9]{1,6})?\s*$/;
   return currencyRegex.test(input);
 };
 //input validation function end
