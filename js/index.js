@@ -1,4 +1,4 @@
-let amounts = document.querySelectorAll(".first .valyuta");
+const amounts = document.querySelectorAll(".first .valyuta");
 let amountsTwo = document.querySelectorAll(".second .valyuta");
 let firstInput = document.getElementById("firstInput");
 let secondInput = document.getElementById("secondInput");
@@ -13,6 +13,7 @@ secondInput.value = "";
 const url = "http://api.exchangerate.host/convert";
 const key = "be847e0a717e240985d4dfa2033bb229";
 
+//actice class left side start
 amounts.forEach((item) => {
   item.addEventListener("click", (e) => {
     if (!item.classList.contains("active")) {
@@ -27,6 +28,9 @@ amounts.forEach((item) => {
   });
 });
 
+//actice class left side end
+
+//actice class right side start
 amountsTwo.forEach((item) => {
   item.addEventListener("click", (e) => {
     if (!item.classList.contains("active")) {
@@ -41,12 +45,16 @@ amountsTwo.forEach((item) => {
     }
   });
 });
+//actice class right side end
 
+//input validation function start
 const regexFunc = (input) => {
   let currencyRegex = /^\s*[0-9]*(\.[0-9]{1,2})?\s*$/;
   return currencyRegex.test(input);
 };
+//input validation function end
 
+//default 1 currency amount start
 const render = () => {
   fetch(`${url}?access_key=${key}&from=${valyuta1}&to=${valyuta2}&amount=10`)
     .then((res) => res.json())
@@ -60,7 +68,9 @@ const render = () => {
     })
     .catch((err) => console.log(err));
 };
+//default 1 currency amount start
 
+//first converterFunc start
 const firstConvertFunc = () => {
   if (regexFunc(firstInput.value)) {
     fetch(
@@ -83,7 +93,9 @@ const firstConvertFunc = () => {
     alert("please enter a valid number");
   }
 };
+//first converterFunc end
 
+//second converterFunc start
 const secondConvertFunc = () => {
   if (regexFunc(secondInput.value)) {
     fetch(
@@ -106,6 +118,7 @@ const secondConvertFunc = () => {
     alert("please enter a valid number");
   }
 };
+//second converterFunc end
 
 render();
 firstInput.addEventListener("input", firstConvertFunc);
