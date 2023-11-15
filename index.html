@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/index.css" />
+    <title>Currency Converter</title>
+  </head>
+  <body>
+    <section class="header-section">
+      <div class="container">
+        <div class="header-wrapper">
+          <div class="logo">
+            <a href=""><img src="/assets/images/logo.svg" alt="" /></a>
+          </div>
+          <div class="center-wrapper">
+            <ul class="link-list">
+              <li class="active">БАНК</li>
+              <li>БИЗНЕС</li>
+              <li>ИНВЕСТИЦИИ</li>
+              <li>МОБАЙЛ</li>
+              <li>ПУТЕШЕСТВИЯ</li>
+              <li>РАЗВЛЕЧЕНИЯ</li>
+              <li>СТРАХОВАНИЕ</li>
+            </ul>
+          </div>
+          <div class="right-wrapper">
+            <button>ВОЙТИ</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="currency-converter-section">
+      <div class="wrapper">
+        <h2>Конвертер валют онлайн</h2>
+        <div class="currency-converter-content">
+          <div class="converter first">
+            <div class="currencies-info">
+              <div class="currencies-wrapper">
+                <p>У меня есть</p>
+                <ul class="curriencies-list">
+                  <li class="valyuta active">RUB</li>
+                  <li class="valyuta">USD</li>
+                  <li class="valyuta">EUR</li>
+                  <li class="valyuta">AZN</li>
+                </ul>
+              </div>
+              <div class="amount-wrapper">
+                <input type="number" id="firstInput" />
+                <p id="note1">1 RUB = 0.0135 USD</p>
+              </div>
+            </div>
+          </div>
+          <div class="converter second">
+            <div class="currencies-info">
+              <div class="currencies-wrapper">
+                <p>Хочу приобрести</p>
+                <ul class="curriencies-list">
+                  <li class="valyuta">RUB</li>
+                  <li class="valyuta">USD</li>
+                  <li class="valyuta">EUR</li>
+                  <li class="valyuta active">AZN</li>
+                </ul>
+              </div>
+              <div class="amount-wrapper">
+                <input type="number" id="secondInput" />
+                <p id="note2">1 USD = 73.8896 RUB</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="/js/index.js"></script>
+  </body>
+</html>

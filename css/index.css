@@ -1,0 +1,145 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+@import url(/css/reset.css);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.header-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f5f5f6;
+  padding: 15px 0;
+}
+.container {
+  width: 80%;
+}
+.header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.center-wrapper {
+  display: flex;
+}
+.link-list {
+  display: flex;
+  align-items: center;
+  align-items: center;
+  gap: 13px;
+  font-size: 11px;
+  list-style: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.66px;
+  color: #959ba4;
+}
+.link-list li {
+  cursor: pointer;
+}
+.link-list li.active {
+  color: black;
+}
+.link-list li:hover {
+  color: black;
+}
+button {
+  background-color: white;
+  font-size: 11px;
+  border: none;
+  padding: 10px;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+}
+.currency-converter-section {
+  display: flex;
+  justify-content: center;
+
+  /* align-items: center; */
+  width: 100%;
+  /* height: calc(100vh - 63.33px); */
+  /* background-color: blue; */
+}
+.wrapper {
+  margin-top: 56px;
+  /* max-height: 25rem; */
+  min-width: 38rem;
+}
+.currency-converter-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.wrapper h2 {
+  color: #000;
+  font-family: Roboto;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  padding-bottom: 33px;
+}
+.currencies-wrapper p {
+  color: #9f9f9f;
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding: 7px 0;
+}
+.curriencies-list {
+  display: flex;
+  margin-bottom: 21px;
+}
+.curriencies-list li {
+  border: 1px solid #c6c6c6;
+  color: #c6c6c6;
+  padding: 5.465px 15.371px;
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  cursor: pointer;
+}
+.curriencies-list li.active {
+  background: #833ae0;
+  color: white;
+}
+.curriencies-list li:not(:last-child) {
+  border-right: none;
+}
+.amount-wrapper,
+input {
+  width: 100%;
+}
+.amount-wrapper {
+  border: 1px solid #e5e5e5;
+  padding: 0 10px;
+  height: 6.375rem;
+  display: flex;
+
+  flex-direction: column;
+  justify-content: space-around;
+}
+.amount-wrapper input {
+  border: none;
+  height: 50%;
+  color: #000;
+  font-family: Roboto;
+}
+input:focus {
+  border: none;
+}
+.amount-wrapper p {
+  color: #c6c6c6;
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
