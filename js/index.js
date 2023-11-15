@@ -10,8 +10,8 @@ let valyuta2 = document.querySelector(".second .active").innerHTML;
 firstInput.value = "";
 secondInput.value = "";
 
-const url = "http://api.exchangerate.host/convert";
-const key = "be847e0a717e240985d4dfa2033bb229";
+const url = "https://v6.exchangerate-api.com/v6/";
+const key = "e158cd98f7384d574b36646e";
 
 //actice class left side start
 amounts.forEach((item) => {
@@ -56,11 +56,11 @@ const regexFunc = (input) => {
 
 //default 1 currency amount start
 const render = () => {
-  fetch(`${url}?access_key=${key}&from=${valyuta1}&to=${valyuta2}&amount=10`)
+  fetch(`${url}/${key}/pair/${valyuta1}/${valyuta2}/10`)
     .then((res) => res.json())
     .then((data) => {
-      note1.innerHTML = `1 ${valyuta1} = ${data.info.quote} ${valyuta2}`;
-      note2.innerHTML = `1 ${valyuta2} = ${(1 / data.info.quote).toFixed(
+      note1.innerHTML = `1 ${valyuta1} = ${data.conversion_rate} ${valyuta2}`;
+      note2.innerHTML = `1 ${valyuta2} = ${(1 / data.conversion_rate).toFixed(
         5
       )} ${valyuta1}`;
 
@@ -73,17 +73,15 @@ const render = () => {
 //first converterFunc start
 const firstConvertFunc = () => {
   if (regexFunc(firstInput.value)) {
-    fetch(
-      `${url}?access_key=${key}&from=${valyuta1}&to=${valyuta2}&amount=${firstInput.value}`
-    )
+    fetch(`${url}/${key}/pair/${valyuta1}/${valyuta2}/${firstInput.value}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        secondInput.value = data.result;
-        note1.innerHTML = `1 ${valyuta1} = ${data.info.quote} ${valyuta2}`;
-        note2.innerHTML = `1 ${valyuta2} =  ${(1 / data.info.quote).toFixed(
-          5
-        )} ${valyuta1}`;
+        secondInput.value = data.conversion_result.toFixed(6);
+        note1.innerHTML = `1 ${valyuta1} = ${data.conversion_rate} ${valyuta2}`;
+        note2.innerHTML = `1 ${valyuta2} =  ${(
+          1 / data.conversion_rate
+        ).toFixed(5)} ${valyuta1}`;
 
         console.log(data);
       })
@@ -94,22 +92,24 @@ const firstConvertFunc = () => {
   }
 };
 //first converterFunc end
-
+//${url}?access_key=${key}&from=${valyuta2}&to=${valyuta1}&amount=${secondInput.value}
 //second converterFunc start
 const secondConvertFunc = () => {
   if (regexFunc(secondInput.value)) {
     fetch(
-      `${url}?access_key=${key}&from=${valyuta2}&to=${valyuta1}&amount=${secondInput.value}`
+      //const url = "https://v6.exchangerate-api.com/v6/";
+      //GET https://v6.exchangerate-api.com/v6/YOUR-API-KEY/pair/EUR/GBP/AMOUNT
+      `${url}/${key}/pair/${valyuta2}/${valyuta1}/${secondInput.value}`
     )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        firstInput.value = data.result;
-        note1.innerHTML = `1 ${valyuta2} = ${data.info.quote} ${valyuta1}`;
-        note2.innerHTML = `1 ${valyuta1} = ${(1 / data.info.quote).toFixed(
+        firstInput.value = data.conversion_result.toFixed(6);
+        note1.innerHTML = `1 ${valyuta2} = ${data.conversion_rate} ${valyuta1}`;
+        note2.innerHTML = `1 ${valyuta1} = ${(1 / data.conversion_rate).toFixed(
           5
-        )} ${valyuta1}`;
-
+        )} ${valyuta2}`;
+        console.log(valyuta2);
         console.log(data);
       })
       .catch((err) => console.log(err));
