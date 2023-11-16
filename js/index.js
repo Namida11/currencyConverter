@@ -23,6 +23,7 @@ amounts.forEach((item) => {
       item.classList.add("active");
       valyuta1 = e.target.innerHTML;
       firstConvertFunc();
+      render();
       console.log(valyuta1);
     }
   });
@@ -40,7 +41,7 @@ amountsTwo.forEach((item) => {
       item.classList.add("active");
       valyuta2 = e.target.innerHTML;
       secondConvertFunc();
-
+      render();
       console.log(valyuta2);
     }
   });
@@ -49,9 +50,17 @@ amountsTwo.forEach((item) => {
 
 //input validation function start
 const regexFunc = (input) => {
-  let currencyRegex = /^\s*[0-9]*(\.[0-9]{1,6})?\s*$/;
-  return currencyRegex.test(input);
+  let regexValue = input.value.replace(/[^0-9.,]/g, "");
+
+  regexValue = regexValue.replace(/,/g, ".");
+
+  let dotCount = regexValue.split(".").length - 1;
+  if (dotCount > 1) {
+    regexValue = regexValue.slice(0, -1);
+  }
+  return (input.value = regexValue);
 };
+
 //input validation function end
 
 //default 1 currency amount start
@@ -72,51 +81,39 @@ const render = () => {
 
 //first converterFunc start
 const firstConvertFunc = () => {
-  if (regexFunc(firstInput.value)) {
-    fetch(`${url}/${key}/pair/${valyuta1}/${valyuta2}/${firstInput.value}`)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        secondInput.value = data.conversion_result.toFixed(6);
-        note1.innerHTML = `1 ${valyuta1} = ${data.conversion_rate} ${valyuta2}`;
-        note2.innerHTML = `1 ${valyuta2} =  ${(
-          1 / data.conversion_rate
-        ).toFixed(5)} ${valyuta1}`;
+  regexFunc(firstInput);
+  fetch(`${url}/${key}/pair/${valyuta1}/${valyuta2}/${firstInput.value}`)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      secondInput.value = data.conversion_result.toFixed(6);
+      note1.innerHTML = `1 ${valyuta1} = ${data.conversion_rate} ${valyuta2}`;
+      note2.innerHTML = `1 ${valyuta2} =  ${(1 / data.conversion_rate).toFixed(
+        5
+      )} ${valyuta1}`;
 
-        console.log(data);
-      })
-      .catch((err) => console.log(err));
-  } else {
-    secondInput.value = "NaN";
-    alert("please enter a valid number");
-  }
+      console.log(data);
+    })
+    .catch((err) => console.log(err));
 };
 //first converterFunc end
-//${url}?access_key=${key}&from=${valyuta2}&to=${valyuta1}&amount=${secondInput.value}
+
 //second converterFunc start
 const secondConvertFunc = () => {
-  if (regexFunc(secondInput.value)) {
-    fetch(
-      //const url = "https://v6.exchangerate-api.com/v6/";
-      //GET https://v6.exchangerate-api.com/v6/YOUR-API-KEY/pair/EUR/GBP/AMOUNT
-      `${url}/${key}/pair/${valyuta2}/${valyuta1}/${secondInput.value}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        firstInput.value = data.conversion_result.toFixed(6);
-        note1.innerHTML = `1 ${valyuta2} = ${data.conversion_rate} ${valyuta1}`;
-        note2.innerHTML = `1 ${valyuta1} = ${(1 / data.conversion_rate).toFixed(
-          5
-        )} ${valyuta2}`;
-        console.log(valyuta2);
-        console.log(data);
-      })
-      .catch((err) => console.log(err));
-  } else {
-    firstInput.value = "NaN";
-    alert("please enter a valid number");
-  }
+  regexFunc(secondInput);
+  fetch(`${url}/${key}/pair/${valyuta2}/${valyuta1}/${secondInput.value}`)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      firstInput.value = data.conversion_result.toFixed(6);
+      note1.innerHTML = `1 ${valyuta2} = ${data.conversion_rate} ${valyuta1}`;
+      note2.innerHTML = `1 ${valyuta1} = ${(1 / data.conversion_rate).toFixed(
+        5
+      )} ${valyuta2}`;
+      console.log(valyuta2);
+      console.log(data);
+    })
+    .catch((err) => console.log(err));
 };
 //second converterFunc end
 
